@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modify a deal</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <form action="/put-request" method="post">
+        <h1>Modify a deal</h1>
+        <label for="id">ID (required): </label>
+        <input type="text" id="id" name="id" required>
+        <br>
+        <label for="title">Title: </label>
+        <input type="text" id="title" name="title" >
+        <br>
+        <label for="value">Value: </label>
+        <input type="text" id="value" name="value" >
+        <br>
+        <label for="status">Status (open/won/lost/deleted): </label>
+        <input type="text" id="status" name="status" >
+        <br>
+        <label for="date">Date: </label>
+        <input type="datetime-local" id="date" name="date" >
+        <br>
+        <label for="exp_close_date">Description: </label>
+        <input type="date" id="exp_close_date" name="exp_close_date" >
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
