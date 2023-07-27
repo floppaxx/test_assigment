@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"regexp"
 	"time"
@@ -124,10 +124,12 @@ func handleGetResponse(w http.ResponseWriter, r *http.Request) {
 	}
 	defer resp.Body.Close()
 
+	fmt.Println("Add deal response status:", resp.Status)
+
 	latency := time.Since(start)
 
 	// Read the response body
-	response, err := ioutil.ReadAll(resp.Body)
+	response, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error reading API response:", err)
 		return
@@ -275,16 +277,6 @@ func handlePutRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Read the response body
-	responseBody, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println("Error reading response:", err)
-		return
-	}
-
-	fmt.Println("Response from API:")
-	fmt.Println(string(responseBody))
-
 	fmt.Fprintf(w, "PUT request was send")
 
 	duration := time.Since(start)
@@ -405,7 +397,7 @@ func ValidateInputs(title string, value string, status string, date string, exp_
 	}
 
 	match, err := regexp.MatchString("^[0-9]*$", value)
-	if match == true && err == nil {
+	if match && err == nil {
 		fmt.Println("Value validated:", match)
 	} else if value == "" {
 		fmt.Println("No value provided")
@@ -417,7 +409,7 @@ func ValidateInputs(title string, value string, status string, date string, exp_
 	if status == "" {
 		fmt.Println("No status provided")
 	} else if status != "open" && status != "won" && status != "lost" && status != "deleted" {
-		return fmt.Errorf("Status cannot be empty or be invalid")
+		return fmt.Errorf("status cannot be empty or be invalid")
 	} else {
 		fmt.Println("Status validated:", status)
 	}
