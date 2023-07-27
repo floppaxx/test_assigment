@@ -1,0 +1,14 @@
+name: Deployed
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log Deployed!
+        run: echo "Deployed!"
+    
