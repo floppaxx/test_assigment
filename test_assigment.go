@@ -157,7 +157,11 @@ func handlePostRequest(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 
 	// Parse the form data
-	r.ParseForm()
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Println(w, "Error parsing form:", err)
+		return
+	}
 	title := r.FormValue("title")
 	value := r.FormValue("value")
 	status := r.FormValue("status")
@@ -213,7 +217,11 @@ func handlePutRequest(w http.ResponseWriter, r *http.Request) {
 	start := time.Now()
 
 	// Parse the form data
-	r.ParseForm()
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Println(w, "Error parsing form:", err)
+		return
+	}
 	id := r.FormValue("id")
 	title := r.FormValue("title")
 	value := r.FormValue("value")
