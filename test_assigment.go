@@ -397,21 +397,24 @@ func formatDealInfo(deal Deal) string {
 
 // This function is used to validate the inputs provided by the user
 func ValidateInputs(title string, value string, status string, date string, exp_close_date string) error {
-	if title == "" {
-		fmt.Println("title cannot be empty")
-		return fmt.Errorf("title cannot be empty")
+	matchTitle, err := regexp.MatchString(`^\b[A-z0-9 ]*\b$`, title)
+	if matchTitle && err == nil {
+		fmt.Println("Title validated:", matchTitle)
+	} else if title == "" {
+		return fmt.Errorf("no title provided")
 	} else {
-		fmt.Println("Title validated:", title)
+		fmt.Println("Title error. Match:", matchTitle)
+		return fmt.Errorf("title was not validated, exclude special characters")
 	}
 
-	match, err := regexp.MatchString("^[0-9]*$", value)
-	if match && err == nil {
-		fmt.Println("Value validated:", match)
+	matchValue, err := regexp.MatchString(`^[0-9]*$`, value)
+	if matchValue && err == nil {
+		fmt.Println("Value validated:", matchValue)
 	} else if value == "" {
 		fmt.Println("No value provided")
 	} else {
-		fmt.Println("Value error. Match:", match)
-		return fmt.Errorf("value cannot be empty")
+		fmt.Println("Value error. Match:", matchValue)
+		return fmt.Errorf("value was not validated, exclude special characters or letters")
 	}
 
 	if status == "" {

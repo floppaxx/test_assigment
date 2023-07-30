@@ -141,6 +141,19 @@ func TestValidateInputs(t *testing.T) {
 	if err == nil {
 		t.Errorf("Test case 8: expected error for invalid expected close date format, but got no error")
 	}
+
+	//Test case 7: Invalid title
+	err = ValidateInputs("alert('test')", "100", "open", "2023-07-25T12:34", "2023-08-25")
+	if err == nil {
+		t.Errorf("Test case 3: expected error for invalid title, but got no error")
+	}
+
+	//Test case 8: Invalid value (negative)
+	err = ValidateInputs("Test Deal", "alert('test')", "open", "2023-07-25T12:34", "2023-08-25")
+	if err == nil {
+		t.Errorf("Test case 3: expected error for invalid value, but got no error")
+	}
+
 }
 
 // Test the function WriteMetrics

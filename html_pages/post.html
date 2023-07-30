@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Add new deal</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
     <form action="/post-request" method="post">
@@ -16,10 +16,10 @@
         <label for="status">Status (open/won/lost/deleted): </label>
         <input type="text" id="status" name="status" >
         <br>
-        <label for="date">Date: </label>
+        <label for="date">Add date: </label>
         <input type="datetime-local" id="date" name="date" >
         <br>
-        <label for="exp_close_date">Description: </label>
+        <label for="exp_close_date">Expected close date: </label>
         <input type="date" id="exp_close_date" name="exp_close_date" >
         <input type="submit" value="Submit">
     </form>
